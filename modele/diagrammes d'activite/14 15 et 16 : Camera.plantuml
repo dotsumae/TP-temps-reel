@@ -1,0 +1,36 @@
+@startuml
+'Fonctionnalite 14, 15 et 16 : Camera
+
+skinparam monochrome true
+
+start
+
+:Ouvrir camera?;
+:Camera.open();
+
+while (openreussi) is (false)
+    :Envoyer Message to Mon(NACK);
+    :Ouvrir camera?;
+    :Camera.open();
+endwhile(true)
+
+:start_period(100ms);
+
+repeat
+(A) 'FAUX
+
+:wait_next_period();
+if (camera_close) then (false)
+    if (I=Camera_grab) then (true)
+        (A)
+    else (false)
+    :I=Imgtojpg(I);
+    :Envoyer Message to Mon(I);
+    endif
+
+else (true)
+    :Fermer_Camera;
+    :Stopper_Envoi;
+    stop
+    endif
+@enduml
