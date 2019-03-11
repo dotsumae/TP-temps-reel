@@ -1,0 +1,25 @@
+@startuml
+'Fonctionnalite 13 : Checkbattery
+
+skinparam monochrome true
+
+start
+:Start Period (100ms);
+
+while ()
+  :Wait_next_period();
+  if (RobotStarted) then (yes)
+  :lvlbat=Robot.Write(Message(Get_Vbat));
+  :ComMonitor.Write(Message(lvlbat));
+else (no)
+  
+endif
+
+
+endwhile
+
+
+
+
+stop
+@enduml
