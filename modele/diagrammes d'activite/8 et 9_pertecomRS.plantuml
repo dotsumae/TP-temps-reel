@@ -1,0 +1,27 @@
+@startuml
+'Fonctionnalite 8 et 9 : 
+
+skinparam monochrome true
+
+start
+repeat
+:MsgtoRobot?msg;
+:err=Robot.Write(msg);
+
+if (err=0) then (yes)
+  :compteur=0;
+  else (no)
+  :compteur=compteur+1;
+endif
+
+repeat while (compteur <= 3)
+-> no; 
+:ComMonitor.Write(Lost_DMB);
+:ComRobot.Close();
+:OuvrirComRobot!;
+
+
+
+
+stop
+@enduml
