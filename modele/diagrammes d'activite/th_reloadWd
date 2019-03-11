@@ -1,0 +1,17 @@
+@startuml
+skinparam monochrome true
+
+start
+:reloadWd?;
+:Start Period (1s);
+
+while ()
+  :Wait_next_period();
+  :Robot.Write(Message(DMB_RELOAD_WD));
+endwhile
+
+
+
+
+stop
+@enduml
