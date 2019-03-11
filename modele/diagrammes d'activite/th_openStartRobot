@@ -1,0 +1,18 @@
+@startuml
+skinparam monochrome true
+start
+while()
+ :startRobot?;
+ if (withWd=0) then (true) 
+  :msgSend = robot.Write(new Message(MESSAGE_ROBOT_START_WITHOUT_WD));
+ else (false)
+  :msgSend = robot.Write(new Message(MESSAGE_ROBOT_START_WITH_WD));
+  :reloadWd!;
+ endif 
+ :messageToMon!msgSend;
+ if (msgSend->getId()) then (MESSAGE_ANSWER_ACK)
+  :robotStarted = true;
+ endif
+endwhile
+stop
+@enduml
