@@ -1,0 +1,22 @@
+@startuml
+'Fonctionnalite 17 : calibrer arène
+:Rechercher arène?;
+'envoyer fermer camera a la camera
+:Fermer camera;
+:image=Camera.Grab();
+:arena=Img.SearchArena(image);
+if (arena) then (NULL)
+    :ComMonitor.Write(Message(NO_ACK));
+else
+    :image=Img.DrawArena(image, arena);
+    :jpgimage=Img.ToJpg(image);
+    :ComMonitor.Write(Message(jpgimage));
+    if (arena ok) then (true)
+        :save arena;
+    else (false)
+        :delete arena;
+    endif
+endif
+:ouvrir camera;
+stop
+@enduml
