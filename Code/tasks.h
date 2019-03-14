@@ -78,6 +78,8 @@ private:
     RT_TASK th_startRobot;
     RT_TASK th_move;
     RT_TASK th_checkBattery; 
+    RT_TASK th_reloadWd;
+    RT_TASK th_lostComRS;
     
     /**********************************************************************/
     /* Mutex                                                              */
@@ -86,7 +88,8 @@ private:
     RT_MUTEX mutex_robot;
     RT_MUTEX mutex_robotStarted;
     RT_MUTEX mutex_move;
-
+    RT_MUTEX mutex_withWd;
+    
     /**********************************************************************/
     /* Semaphores                                                         */
     /**********************************************************************/
@@ -94,12 +97,14 @@ private:
     RT_SEM sem_openComRobot;
     RT_SEM sem_serverOk;
     RT_SEM sem_startRobot;
-
+    RT_SEM sem_startReloadWd;
+    
     /**********************************************************************/
     /* Message queues                                                     */
     /**********************************************************************/
     int MSG_QUEUE_SIZE;
     RT_QUEUE q_messageToMon;
+    RT_QUEUE q_messageToRobot;
     
     /**********************************************************************/
     /* Tasks' functions                                                   */
@@ -138,6 +143,16 @@ private:
      * @brief Thread that checks battery level
      */
     void CheckBatteryTask(void *arg);
+    
+     /**
+     * @brief Thread that reload the Wd on the robot
+     */
+    void ReloadWdTask(void *arg);
+    
+    /**
+     * @brief Thread that detect the lost of communication with the robot
+     */
+    void LostComRSTask(void *arg);
     
     /**********************************************************************/
     /* Queue services                                                     */
