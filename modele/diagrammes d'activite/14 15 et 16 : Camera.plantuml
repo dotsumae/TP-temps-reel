@@ -8,29 +8,19 @@ start
 :Ouvrir camera?;
 :Camera.open();
 
-while (openreussi) is (false)
-    :Envoyer Message to Mon(NACK);
-    :Ouvrir camera?;
-    :Camera.open();
-endwhile(true)
+fork
+    while (camera active = 0) is (false)
+        :image=camera.grab();
+        :I=Img.ToJpg(image);
+        :ComMonitor.Write(Message(I));
+    endwhile (true)
 
-:start_period(100ms);
+fork again
+'Attendre le signal de fermeture de la camera
+    :Fermer camera?; 
+    :Camera.close();
+    :Stopper envoi;
 
-repeat
-(A) 'FAUX
-
-:wait_next_period();
-if (camera_close) then (false)
-    if (I=Camera_grab) then (true)
-        (A)
-    else (false)
-    :I=Imgtojpg(I);
-    :Envoyer Message to Mon(I);
-    endif
-
-else (true)
-    :Fermer_Camera;
-    :Stopper_Envoi;
-    stop
-    endif
+end fork
+stop
 @enduml
