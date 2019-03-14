@@ -2,15 +2,17 @@
 skinparam monochrome true
 
 start
+
 :startReloadWd?;
+
 :Start Period (1s);
 
 while ()
   :Wait_next_period();
+  if(robotStarted==1) then (true)
   :Robot.Write(Message(DMB_RELOAD_WD));
+  endif 
 endwhile
-
-
 
 
 stop
