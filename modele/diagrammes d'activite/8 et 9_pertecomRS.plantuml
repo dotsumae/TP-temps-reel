@@ -6,9 +6,8 @@ skinparam monochrome true
 start
 repeat
 :MsgtoRobot?msg;
-:err=Robot.Write(msg);
 
-if (err=0) then (yes)
+if (msg==Nak) then (yes)
   :compteur=0;
   else (no)
   :compteur=compteur+1;
