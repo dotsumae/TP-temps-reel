@@ -9,7 +9,7 @@ start
 while ()
   :Wait_next_period();
   if (RobotStarted) then (yes)
-  :lvlbat=Robot.Write(Message(Get_Vbat));
+  :lvlbat=Robot.Write(Message(BATTERY_GET));
   :ComMonitor.Write(Message(lvlbat));
 else (no)
   
@@ -17,8 +17,6 @@ endif
 
 
 endwhile
-
-
 
 
 stop
