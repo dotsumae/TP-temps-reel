@@ -66,7 +66,8 @@ private:
     ComRobot robot;
     int robotStarted;
     int move = MESSAGE_ROBOT_STOP;
-    
+    int withWd = 0; //variable equals 0 if start without watchdog, 1 otherwise
+
     /**********************************************************************/
     /* Tasks                                                              */
     /**********************************************************************/
