@@ -2,7 +2,7 @@
 skinparam monochrome true
 
 start
-:reloadWd?;
+:startReloadWd?;
 :Start Period (1s);
 
 while ()
