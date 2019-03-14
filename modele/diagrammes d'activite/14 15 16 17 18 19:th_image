@@ -1,0 +1,86 @@
+@startuml
+'Fonctionnalite 14 15 16 17 18 19 : camera arene position
+skinparam monochrome true
+
+start 
+
+repeat
+:OuvrirCamera?;
+:Camera.Open();
+repeat while (OpenReussi?)
+->yes;
+
+  
+
+if (RechercherArena?) then (yes)
+
+
+:image=Camera.Grab();
+:arena=Img.SearchArena(image);
+if (arena) then (NULL)
+    :ComMonitor.Write(Message(NO_ACK));
+else
+    :image=Img.DrawArena(image, arena);
+    :jpgimage=Img.ToJpg(image);
+    :ComMonitor.Write(Message(jpgimage));
+    if (arena ok) then (true)
+        :save arena;
+    else (false)
+        :delete arena;
+    endif
+endif
+
+
+
+
+
+
+  else (no)
+  
+:StartPeriod(100ms);
+repeat
+:WaitNextPeriod;
+
+if (Camera.Close) then (no)
+ :FermerCamera;
+ :StopperEnvoi;
+ stop
+else
+ if (I=Camera.Grab=1) then (yes)
+   if (TrouverPos=1) then (yes)
+    :Pos=SearchRobot(I,arena):
+     if (Pos=null) then (no)
+      :I=DrawRobot(I,Pos);
+     else(no)
+      :Pos=null;
+     end if
+     :ComMonitor.Write(Pos); 
+    end if
+ :I=ImgtoJPG(I);
+ :ComMonitor.Write(I);
+ endif
+
+
+endif
+
+repeat while
+endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+stop
+@enduml
