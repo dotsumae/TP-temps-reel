@@ -7,7 +7,7 @@ while()
   :msgSend = robot.Write(new Message(MESSAGE_ROBOT_START_WITHOUT_WD));
  else (false)
   :msgSend = robot.Write(new Message(MESSAGE_ROBOT_START_WITH_WD));
-  :reloadWd!;
+  :startReloadWd!;
  endif 
  :messageToMon!msgSend;
  if (msgSend->getId()) then (MESSAGE_ANSWER_ACK)
