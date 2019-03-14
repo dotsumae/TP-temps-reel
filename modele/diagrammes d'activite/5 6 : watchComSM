@@ -1,0 +1,23 @@
+@startuml
+'Fonctionnalite 5 et 6 : Perte et reset superviseur moniteur
+
+skinparam monochrome true
+
+start
+repeat
+    :Connexion_etablie?;
+    :Ouvrir_Socket?;
+    :err=Comonitor.read();
+repeat while (err != MESSAGE_MONITOR_LOST)
+:ComMonitor.Close();
+:print("monitor is lost");
+'stopper robot, communication avec robot, fermer le serveur, deconnecter la camera (revenir au démarrage du superviseur)
+:MESSAGE_ROBOT_STOP_MOVE!;
+:MESSAGE_ROBOT_COM_CLOSE!;
+:MESSAGE_CAM_CLOSE!;
+
+
+
+
+stop
+@enduml
