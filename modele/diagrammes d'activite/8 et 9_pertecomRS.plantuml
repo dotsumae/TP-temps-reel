@@ -7,7 +7,7 @@ start
 repeat
 :MsgtoRobot?msg;
 
-if (msg==Nak) then (yes)
+if (msg==Nak||error||timeout) then (yes)
   :compteur=0;
   else (no)
   :compteur=compteur+1;
