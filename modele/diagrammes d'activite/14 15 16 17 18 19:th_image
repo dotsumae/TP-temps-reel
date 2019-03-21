@@ -7,7 +7,8 @@ start
 repeat
 :OuvrirCamera?;
 :Camera.Open();
-repeat while (OpenReussi?)
+repeat while (OpenReussi?) 
+
 ->yes;
 
 
@@ -24,7 +25,7 @@ if (RechercherArena?) then (yes)
     :ComMonitor.Write(Message(NO_ACK));
  else
     :image=Img.DrawArena(image, arena);
-    :jpgimage=Img.ToJpg(image);
+
     :ComMonitor.Write(Message(jpgimage));
     if (arena ok) then (true)
         :save arena;
@@ -55,7 +56,7 @@ else
      if (Arena!=null) then (yes)
       :I.DrawArena(I, Arena);
      endif
- :I=ImgtoJPG(I);
+
  :ComMonitor.Write(I);
  endif
 
