@@ -10,16 +10,21 @@ repeat
 repeat while (OpenReussi?)
 ->yes;
 
+
+
   
+:StartPeriod(100ms);
+
+
+
+repeat
 
 if (RechercherArena?) then (yes)
-
-
-:image=Camera.Grab();
-:arena=Img.SearchArena(image);
-if (arena) then (NULL)
+ :image=Camera.Grab();
+ :arena=Img.SearchArena(image);
+ if (arena) then (NULL)
     :ComMonitor.Write(Message(NO_ACK));
-else
+ else
     :image=Img.DrawArena(image, arena);
     :jpgimage=Img.ToJpg(image);
     :ComMonitor.Write(Message(jpgimage));
@@ -28,43 +33,38 @@ else
     else (false)
         :delete arena;
     endif
+ endif
 endif
 
-
-
-
-
-
-  else (no)
-  
-:StartPeriod(100ms);
-repeat
 :WaitNextPeriod;
 
 if (Camera.Close) then (no)
- :FermerCamera;
+ :FermerCamera?;
  :StopperEnvoi;
  stop
 else
  if (I=Camera.Grab=1) then (yes)
    if (TrouverPos=1) then (yes)
     :Pos=SearchRobot(I,arena):
-     if (Pos=null) then (no)
+     if (Pos==null) then (no)
       :I=DrawRobot(I,Pos);
-     else(no)
+     else (no)
       :Pos=null;
-     end if
+     endif
      :ComMonitor.Write(Pos); 
-    end if
+     if (Arena!=null) then (yes)
+      :I.DrawArena(I, Arena);
+     endif
+    endif
  :I=ImgtoJPG(I);
  :ComMonitor.Write(I);
  endif
 
 
-endif
+'endif
 
 repeat while
-endif
+'endif
 
 
 
