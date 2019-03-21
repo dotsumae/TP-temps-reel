@@ -410,11 +410,7 @@ void Tasks::ReceiveFromMonTask(void *arg) {
                 openCam=0; 
                 rt_mutex_release(&mutex_openCam)
             }
-            
-        }
-                 
-       
-        
+
             
         } else if (msgRcv->CompareID(MESSAGE_CAM_POSITION_COMPUTE_STOP)){ //stopfindPosition
             rt_mutex_acquire(&mutex_findPosition, TM_INFINITE);
@@ -425,7 +421,7 @@ void Tasks::ReceiveFromMonTask(void *arg) {
         
         
         
-        delete(msgRcv); // mus be deleted manually, no consumer
+        delete(msgRcv); // must be deleted manually, no consumer
     }
 }
 
@@ -652,7 +648,7 @@ void Tasks::ReloadWdTask(void *args){
 
 
 
-void Tasks::Vision(void *args){
+void Tasks::VisionTask(void *args){
     Message *msgSend;
     Image *image;
     cout << "Start " << __PRETTY_FUNCTION__ << endl << flush;
@@ -732,14 +728,17 @@ void Tasks::Vision(void *args){
         else{ //find position=1
             cout << "Start find position (";
             rt_mutex_acquire(&mutex_, TM_INFINITE);//????
-            *position=image.SearchRobot(*arena).front();
+            position=image.SearchRobot(arena).front();
             if (position){ //robot in arena 
-                image.DrawRobot(position);
+                image.DrawRobot(*position);
             }
             else { //robot not in arena
                 position->center=(-1.0,-1.0); //????
             }
-            
+            PertesComRS
+PertesComSM
+
+with WD ?
            cout << "Send msg to mon: " << position->ToString() << endl << flush; //dans une queue  MESSAGE_CAM_POSITION ?
            rt_mutex_acquire(&mutex_monitor, TM_INFINITE);
            monitor.Write(position); 
@@ -748,8 +747,10 @@ void Tasks::Vision(void *args){
         }
     ////////////RENVOI IMG//////////////:
      
-        image.ToJPG;
-        msgSend = monitor.Write(new Message(MESSAGE_CAM_IMAGE)); //??
+        
+        msgSend = monitor.Write(new Message(MESSAGE_CAM_IMAGE, image)); //??
             
+		delete(msgSend);
+		delete(image);
            
         }
