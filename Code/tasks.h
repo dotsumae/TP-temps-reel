@@ -67,7 +67,9 @@ private:
     int robotStarted;
     int move = MESSAGE_ROBOT_STOP;
     int withWd = 0; //variable equals 0 if start without watchdog, 1 otherwise
-
+    int findPosition=0; // variable =0 for stop find position 
+    int openCam=0; //variable=1 if we open the camera, 0 otherwise
+    
     /**********************************************************************/
     /* Tasks                                                              */
     /**********************************************************************/
@@ -80,7 +82,7 @@ private:
     RT_TASK th_checkBattery; 
     RT_TASK th_reloadWd;
     RT_TASK th_lostComRS;
-    
+    RT_TASK th_vision;
     /**********************************************************************/
     /* Mutex                                                              */
     /**********************************************************************/
@@ -89,6 +91,8 @@ private:
     RT_MUTEX mutex_robotStarted;
     RT_MUTEX mutex_move;
     RT_MUTEX mutex_withWd;
+    RT_MUTEX mutex_findPosition;
+    RT_MUTEX mutex_openCam; 
     
     /**********************************************************************/
     /* Semaphores                                                         */
@@ -98,7 +102,7 @@ private:
     RT_SEM sem_serverOk;
     RT_SEM sem_startRobot;
     RT_SEM sem_startReloadWd;
-    
+    RT_SEM sem_vision;
     /**********************************************************************/
     /* Message queues                                                     */
     /**********************************************************************/
@@ -153,6 +157,12 @@ private:
      * @brief Thread that detect the lost of communication with the robot
      */
     void LostComRSTask(void *arg);
+    
+     /**
+     * @brief Thread starting communication with Camera, calibrating arena and finding position
+     */
+    void VisionTask(void *arg);
+    
     
     /**********************************************************************/
     /* Queue services                                                     */
