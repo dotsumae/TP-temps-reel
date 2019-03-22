@@ -4,12 +4,15 @@
 skinparam monochrome true
 
 start
+:robotStarted?;
+
+repeat
 repeat
 :MsgtoRobot?msg;
 
-if (msg==Nak||error||timeout) then (yes)
+if (msg==Nak||error||timeout) then (no)
   :compteur=0;
-  else (no)
+  else (yes)
   :compteur=compteur+1;
 endif
 
@@ -17,10 +20,11 @@ repeat while (compteur <= 3)
 -> no; 
 :ComMonitor.Write(Lost_DMB);
 :ComRobot.Close();
+:robotStarted=0;
 :OuvrirComRobot!;
 
 
 
-
+repeat while (robotStarted) is (yes)
 stop
 @enduml
