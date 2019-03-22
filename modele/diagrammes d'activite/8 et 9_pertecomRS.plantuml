@@ -20,6 +20,7 @@ repeat while (compteur <= 3)
 -> no; 
 :ComMonitor.Write(Lost_DMB);
 :ComRobot.Close();
+:robotStarted=0;
 :OuvrirComRobot!;
 
 
