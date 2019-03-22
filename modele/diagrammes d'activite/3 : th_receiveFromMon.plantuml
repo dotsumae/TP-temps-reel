@@ -18,12 +18,44 @@ while()
       :withWd=1;
       :startRobot!;
      else
+      if (msgRcv.CompareID(MESSAGE_CAM_OPEN))
+      :openCam=1;
+      :ouvrirCamera!;
+      else 
+       if (msgRcv.CompareID(MESSAGE_CAM_CLOSE))
+        :openCam=0;
+        :fermerCamera!;
+       else 
+        if (msgRcv.CompareID(MESSAGE_CAM_ASK_ARENA))
+         :findArena=1;
+         :RechercherArena!;
+        else 
+         if (msgRcv.CompareID(MESSAGE_CAM_ARENA_CONFIRM))
+          :arenaOK=1;
+         else 
+          if (msgRcv.CompareID(MESSAGE_CAM_ARENA_INFIRM))
+           :arenaOK=0;
+          else
+           if (msgRcv.CompareID(MESSAGE_CAM_POSITION_COMPUTE_START))
+            :findPosition=1; 
+           else 
+            if (msgRcv.CompareID(MESSAGE_CAM_POSITION_COMPUTE_STOP))
+             :findPosition=0; 
+           else 
+
       if (msgRcv.CompareID(MESSAGE_ROBOT_GO_FORWARD
        || msgRcv.CompareID(MESSAGE_ROBOT_GO_BACKWARD
        || msgRcv.CompareID(MESSAGE_ROBOT_GO_LEFT
        || msgRcv.CompareID(MESSAGE_ROBOT_GO_RIGHT
        || msgRcv.CompareID(MESSAGE_ROBOT_STOP)) then (true)
        :move = msg.GetId();
+             endif
+            endif
+           endif
+          endif 
+         endif
+        endif
+       endif
       endif
      endif    
     endif
