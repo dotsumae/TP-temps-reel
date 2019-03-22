@@ -4,6 +4,8 @@
 skinparam monochrome true
 
 start
+:robotStarted?;
+
 repeat
 repeat
 :MsgtoRobot?msg;
