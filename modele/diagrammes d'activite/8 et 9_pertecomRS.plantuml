@@ -5,11 +5,12 @@ skinparam monochrome true
 
 start
 repeat
+repeat
 :MsgtoRobot?msg;
 
-if (msg==Nak||error||timeout) then (yes)
+if (msg==Nak||error||timeout) then (no)
   :compteur=0;
-  else (no)
+  else (yes)
   :compteur=compteur+1;
 endif
 
@@ -21,6 +22,6 @@ repeat while (compteur <= 3)
 
 
 
-
+repeat while (robotStarted) is (yes)
 stop
 @enduml
