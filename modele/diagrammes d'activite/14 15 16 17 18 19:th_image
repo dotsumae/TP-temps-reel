@@ -27,9 +27,9 @@ if (RechercherArena?) then (yes)
     :image=Img.DrawArena(image, arena);
 
     :ComMonitor.Write(Message(jpgimage));
-    if (arena ok) then (true)
+    if (arena ok) then (yes)
         :save arena;
-    else (false)
+    else (no)
         :delete arena;
     endif
  endif
@@ -37,8 +37,8 @@ endif
 
 
 
-if (Camera.Close) then (yes)
- :FermerCamera?;
+if (FermerCamera?) then (yes)
+ :Camera.close;
  :StopperEnvoi;
  stop
 else
