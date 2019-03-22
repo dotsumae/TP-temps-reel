@@ -64,7 +64,7 @@ private:
     /**********************************************************************/
     ComMonitor monitor;
     ComRobot robot;
-    int robotStarted;
+    int robotStarted = 0;
     int move = MESSAGE_ROBOT_STOP;
     int withWd = 0; //variable equals 0 if start without watchdog, 1 otherwise
     int findPosition=0; // variable =0 for stop find position 
@@ -103,6 +103,7 @@ private:
     RT_SEM sem_startRobot;
     RT_SEM sem_startReloadWd;
     RT_SEM sem_vision;
+    
     /**********************************************************************/
     /* Message queues                                                     */
     /**********************************************************************/
