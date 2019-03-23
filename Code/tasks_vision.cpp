@@ -773,7 +773,7 @@ void Tasks::VisionTask(void *args){
                     openCameraLocal=openCamera;
                     rt_mutex_release(&mutex_openCamera);
                     
-                    if (openCameraLocal==1) {                   
+                    if (openCameraLocal==1) {    //----------------------------------c'est pas egal à 0 plutot ?               
                        cam->Close();
                        cout << "Camera closing"<< endl << flush;
                        rt_task_delete(&th_vision);
