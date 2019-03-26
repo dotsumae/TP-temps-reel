@@ -68,8 +68,10 @@ private:
     int move = MESSAGE_ROBOT_STOP;
     int withWd = 0; //variable equals 0 if start without watchdog, 1 otherwise
     int findPosition=0; // variable =0 for stop find position 
-    int openCam=0; //variable=1 if we open the camera, 0 otherwise
-    
+    //int openCam=0; //variable=1 if we open the camera, 0 otherwise
+    int findArena=0;
+    int arenaOk=0;
+    int openCamera=0;
     /**********************************************************************/
     /* Tasks                                                              */
     /**********************************************************************/
@@ -93,8 +95,10 @@ private:
     RT_MUTEX mutex_withWd;
     RT_MUTEX mutex_findPosition;
     RT_MUTEX mutex_openCam; 
-    
-    /**********************************************************************/
+    RT_MUTEX mutex_findArena; 
+    RT_MUTEX mutex_arenaOk; 
+    RT_MUTEX mutex_openCamera; 
+  /**********************************************************************/
     /* Semaphores                                                         */
     /**********************************************************************/
     RT_SEM sem_barrier;
