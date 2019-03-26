@@ -570,9 +570,14 @@ void Tasks::LostComRSTask(void *args){
             }
             cout << "compteur perte rs : " << compteur << endl;
             if (compteur==3){
-                rt_mutex_acquire(&mutex_monitor, TM_INFINITE);
-                monitor.Write(new Message (MESSAGE_MONITOR_LOST)); // The message is deleted with the Write
-                rt_mutex_release(&mutex_monitor);
+                
+                //////////////////////l'envoi du message ne fonctionne pas
+                
+                
+            //WriteInQueue(&q_messageToMon, new Message (MESSAGE_MONITOR_LOST));
+            //rt_mutex_acquire(&mutex_monitor, TM_INFINITE);
+            //msgSend=monitor.Write(new Message (MESSAGE_MONITOR_LOST)); // The message is deleted with the Write
+            //rt_mutex_release(&mutex_monitor);
                 
                 rt_mutex_acquire(&mutex_robotStarted, TM_INFINITE);
                 robotStarted=0;
