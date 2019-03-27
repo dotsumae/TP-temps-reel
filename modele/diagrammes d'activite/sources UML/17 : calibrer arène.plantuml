@@ -1,4 +1,6 @@
 @startuml
+skinparam monochrome true
+
 'Fonctionnalite 17 : calibrer arène
 :Rechercher arène?;
 'envoyer fermer camera a la camera
