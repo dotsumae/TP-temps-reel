@@ -5,6 +5,7 @@ start
 while()
   :msgRcv = monitor.Read();
   if (msgRcv.CompareID(MESSAGE_MONITOR_LOST)) then (true)
+  :lostComRS!;
    stop
   else (false)
    if (msgRcv.CompareID(MESSAGE_ROBOT_COM_OPEN)) then (true)
@@ -20,6 +21,8 @@ while()
      else
       if (msgRcv.CompareID(MESSAGE_CAM_OPEN))
       :openCam=1;
+      :createTask(th_vision);
+      :runTask(th_vision);
       :ouvrirCamera!;
       else 
        if (msgRcv.CompareID(MESSAGE_CAM_CLOSE))
@@ -32,9 +35,11 @@ while()
         else 
          if (msgRcv.CompareID(MESSAGE_CAM_ARENA_CONFIRM))
           :arenaOK=1;
+          :arenaOk!; 
          else 
           if (msgRcv.CompareID(MESSAGE_CAM_ARENA_INFIRM))
            :arenaOK=0;
+           :arenaOk!; 
           else
            if (msgRcv.CompareID(MESSAGE_CAM_POSITION_COMPUTE_START))
             :findPosition=1; 
