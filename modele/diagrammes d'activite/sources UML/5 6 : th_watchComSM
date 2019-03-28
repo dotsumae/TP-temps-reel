@@ -4,16 +4,18 @@
 skinparam monochrome true
 
 start
-repeat
     :Connexion_etablie?;
-    :Ouvrir_Socket?;
+    :Start Period (1s);
+
+repeat
+    :Wait_next_period();
     :err=Comonitor.read();
 repeat while (err != MESSAGE_MONITOR_LOST)
 :print("monitor is lost");
 :ComMonitor.Close();
 'stopper robot, reset le robot, deconnecter la camera (revenir au démarrage du superviseur)
-:MESSAGE_ROBOT_STOP_MOVE!;
-:MESSAGE_ROBOT_RESET!;
+:Robot.write(MESSAGE_ROBOT_STOP_MOVE);
+:Robot.Close(); 
 :Camera.Close();
 
 
@@ -21,5 +23,3 @@ repeat while (err != MESSAGE_MONITOR_LOST)
 
 stop
 @enduml
-
-
