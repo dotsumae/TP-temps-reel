@@ -538,7 +538,7 @@ void Tasks::MoveTask(void *arg) {
     /**************************************************************************************/
     /* The task starts here                                                               */
     /**************************************************************************************/
-    rt_task_set_periodic(NULL, TM_NOW, 100000000);
+    rt_task_set_periodic(NULL, TM_NOW, 200000000);
 
     while (1) {
         rt_task_wait_period(NULL);
@@ -703,11 +703,6 @@ void Tasks::LostComRSTask(void *args) {
 void Tasks::VisionTask(void *args) {
     
 
-    /*cout << "Start " << __PRETTY_FUNCTION__ << endl << flush;
-    // Synchronization barrier (waiting that all tasks are starting)
-    int x = rt_sem_p(&sem_barrier, TM_INFINITE);
-    cout << "retour : " << x << endl;
-*/
     Message *msgSend;
     ImageMat temp;
     Camera *cam;
@@ -742,7 +737,7 @@ void Tasks::VisionTask(void *args) {
             } else { //open cam ok
                 cout << "Camera open" << endl << flush;
                 WriteInQueue(&q_messageToMon,new Message(MESSAGE_ANSWER_ACK));
-                rt_task_set_periodic(NULL, TM_NOW, 300000000);
+                rt_task_set_periodic(NULL, TM_NOW, 500000000);
                 while (1) {
                     
                     /////////////////////////////ARENA////////////////////////////////////////////////////
