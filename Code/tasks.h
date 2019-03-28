@@ -68,7 +68,6 @@ private:
     int move = MESSAGE_ROBOT_STOP;
     int withWd = 0; //variable equals 0 if start without watchdog, 1 otherwise
     int findPosition=0; // variable =0 for stop find position 
-    //int openCam=0; //variable=1 if we open the camera, 0 otherwise
     int findArena=0;
     int arenaOk=0;
     int openCamera=0;
@@ -85,6 +84,7 @@ private:
     RT_TASK th_reloadWd;
     RT_TASK th_lostComRS;
     RT_TASK th_vision;
+    RT_TASK th_lostComSM; 
     /**********************************************************************/
     /* Mutex                                                              */
     /**********************************************************************/
@@ -107,6 +107,8 @@ private:
     RT_SEM sem_startRobot;
     RT_SEM sem_startReloadWd;
     RT_SEM sem_vision;
+    RT_SEM sem_arenaOk;
+    RT_SEM sem_lostComSM;
     
     /**********************************************************************/
     /* Message queues                                                     */
@@ -168,7 +170,10 @@ private:
      */
     void VisionTask(void *arg);
     
-    
+     /**
+     * @brief Thread detect the loss of communication between monitor and supervisor
+     */
+    void LostComSMTask(void *arg);
     /**********************************************************************/
     /* Queue services                                                     */
     /**********************************************************************/
